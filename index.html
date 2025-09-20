@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful Bike Helmets</title>
+    <title>Beautiful Bike Helmets | Premium Cycling Safety Gear | Vibe Code Advanced</title>
+    <meta name="description" content="Discover our collection of beautiful bike helmets featuring carbon fiber construction, LED lighting, MIPS safety technology, and premium designs for every cycling adventure.">
+    <meta name="keywords" content="bike helmets, cycling safety, carbon fiber helmets, LED bike helmets, MIPS technology, cycling gear, bicycle helmets, mountain bike helmets, road bike helmets">
+    <meta name="author" content="Vibe Code Advanced">
+    <meta property="og:title" content="Beautiful Bike Helmets | Premium Cycling Safety Gear">
+    <meta property="og:description" content="Premium bike helmets with advanced safety features, stylish designs, and cutting-edge technology for every type of cyclist.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://transcriptionapp.github.io/vibe-code-advanced/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Beautiful Bike Helmets | Premium Cycling Safety Gear">
+    <meta name="twitter:description" content="Premium bike helmets with advanced safety features and stylish designs.">
+    <link rel="canonical" href="https://transcriptionapp.github.io/vibe-code-advanced/">
     <style>
         * {
             margin: 0;
@@ -138,6 +149,23 @@
             transform: scale(1.05);
         }
 
+        .analytics-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            max-width: 200px;
+            display: none;
+        }
+
+        .analytics-info.show {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -233,9 +261,153 @@
         <div class="cta-section">
             <h2 class="cta-title">Find Your Perfect Helmet</h2>
             <p class="cta-text">Every ride deserves the perfect combination of safety, comfort, and style. Discover the helmet that matches your cycling adventure.</p>
-            <a href="#" class="btn">Explore Collection</a>
-            <a href="glasses.html" class="btn">View Bike Glasses</a>
+            <a href="#" class="btn" data-track="explore-collection">Explore Collection</a>
+            <a href="glasses.html" class="btn" data-track="view-glasses">View Bike Glasses</a>
         </div>
     </div>
+    <div id="analytics-info" class="analytics-info">
+        <strong>Analytics Active</strong><br>
+        Clicks tracked: <span id="click-count">0</span>
+    </div>
+
+    <script>
+        // Analytics tracking system
+        class BikeGearAnalytics {
+            constructor() {
+                this.clicks = JSON.parse(localStorage.getItem('bikeGearClicks') || '{}');
+                this.totalClicks = parseInt(localStorage.getItem('totalClicks') || '0');
+                this.init();
+            }
+
+            init() {
+                this.attachClickListeners();
+                this.updateUI();
+                this.showAnalyticsInfo();
+            }
+
+            attachClickListeners() {
+                document.querySelectorAll('[data-track]').forEach(element => {
+                    element.addEventListener('click', (e) => {
+                        const trackingId = e.target.getAttribute('data-track');
+                        this.trackClick(trackingId, e.target.textContent.trim());
+                    });
+                });
+            }
+
+            trackClick(id, text) {
+                const timestamp = new Date().toISOString();
+                const page = 'helmets';
+
+                if (!this.clicks[id]) {
+                    this.clicks[id] = [];
+                }
+
+                this.clicks[id].push({
+                    timestamp,
+                    page,
+                    text,
+                    userAgent: navigator.userAgent,
+                    url: window.location.href
+                });
+
+                this.totalClicks++;
+                this.saveData();
+                this.updateUI();
+
+                console.log(`Analytics: Button clicked - ${id} (${text}) on ${page} page`);
+            }
+
+            saveData() {
+                localStorage.setItem('bikeGearClicks', JSON.stringify(this.clicks));
+                localStorage.setItem('totalClicks', this.totalClicks.toString());
+            }
+
+            updateUI() {
+                const clickCountElement = document.getElementById('click-count');
+                if (clickCountElement) {
+                    clickCountElement.textContent = this.totalClicks;
+                }
+            }
+
+            showAnalyticsInfo() {
+                const analyticsInfo = document.getElementById('analytics-info');
+                if (analyticsInfo) {
+                    analyticsInfo.classList.add('show');
+                    setTimeout(() => {
+                        analyticsInfo.classList.remove('show');
+                    }, 3000);
+                }
+            }
+
+            getAnalyticsData() {
+                return {
+                    clicks: this.clicks,
+                    totalClicks: this.totalClicks,
+                    topButtons: this.getTopButtons(),
+                    recentActivity: this.getRecentActivity()
+                };
+            }
+
+            getTopButtons() {
+                const buttonCounts = {};
+                Object.keys(this.clicks).forEach(buttonId => {
+                    buttonCounts[buttonId] = this.clicks[buttonId].length;
+                });
+                return Object.entries(buttonCounts)
+                    .sort(([,a], [,b]) => b - a)
+                    .slice(0, 5);
+            }
+
+            getRecentActivity(limit = 10) {
+                const allClicks = [];
+                Object.keys(this.clicks).forEach(buttonId => {
+                    this.clicks[buttonId].forEach(click => {
+                        allClicks.push({ buttonId, ...click });
+                    });
+                });
+                return allClicks
+                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+                    .slice(0, limit);
+            }
+        }
+
+        // Initialize analytics when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.bikeGearAnalytics = new BikeGearAnalytics();
+        });
+
+        // SEO and Performance optimizations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lazy loading simulation for images
+            const images = document.querySelectorAll('.helmet-image');
+            images.forEach(img => {
+                img.setAttribute('role', 'img');
+                img.setAttribute('aria-label', 'Bike helmet illustration');
+            });
+
+            // Add structured data for SEO
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "Premium Bike Helmets Collection",
+                "description": "High-quality bicycle helmets with advanced safety features",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Vibe Code Advanced"
+                },
+                "category": "Cycling Safety Equipment",
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "availability": "https://schema.org/InStock",
+                    "priceCurrency": "USD"
+                }
+            };
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(structuredData);
+            document.head.appendChild(script);
+        });
+    </script>
 </body>
 </html>

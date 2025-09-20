@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bike Glasses - Cycling Eyewear Collection</title>
+    <title>Premium Bike Glasses & Cycling Eyewear | UV Protection | Vibe Code Advanced</title>
+    <meta name="description" content="Professional cycling glasses with UV400 protection, photochromic lenses, and impact-resistant designs. Perfect for road cycling, mountain biking, and urban commuting.">
+    <meta name="keywords" content="bike glasses, cycling sunglasses, UV protection eyewear, photochromic lenses, cycling glasses, bicycle sunglasses, sports eyewear, cycling gear">
+    <meta name="author" content="Vibe Code Advanced">
+    <meta property="og:title" content="Premium Bike Glasses & Cycling Eyewear">
+    <meta property="og:description" content="Professional cycling glasses with advanced lens technology and superior protection for all cycling conditions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://transcriptionapp.github.io/vibe-code-advanced/glasses.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Premium Bike Glasses & Cycling Eyewear">
+    <meta name="twitter:description" content="Professional cycling glasses with advanced lens technology.">
+    <link rel="canonical" href="https://transcriptionapp.github.io/vibe-code-advanced/glasses.html">
     <style>
         * {
             margin: 0;
@@ -224,6 +235,23 @@
             transform: scale(1.05);
         }
 
+        .analytics-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            max-width: 200px;
+            display: none;
+        }
+
+        .analytics-info.show {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -238,7 +266,7 @@
 <body>
     <div class="container">
         <nav class="nav">
-            <a href="index.html" class="back-link">← Back to Helmets</a>
+            <a href="index.html" class="back-link" data-track="back-to-helmets">← Back to Helmets</a>
         </nav>
 
         <header>
@@ -376,9 +404,155 @@
         <div class="cta-section">
             <h2 class="cta-title">Protect Your Vision</h2>
             <p class="cta-text">Every ride deserves proper eye protection. Find the perfect glasses for your cycling style and terrain.</p>
-            <a href="#" class="btn">Shop Collection</a>
-            <a href="index.html" class="btn">View Helmets</a>
+            <a href="#" class="btn" data-track="shop-glasses-collection">Shop Collection</a>
+            <a href="index.html" class="btn" data-track="view-helmets-from-glasses">View Helmets</a>
         </div>
     </div>
+    <div id="analytics-info" class="analytics-info">
+        <strong>Analytics Active</strong><br>
+        Clicks tracked: <span id="click-count">0</span>
+    </div>
+
+    <script>
+        // Analytics tracking system (shared with helmets page)
+        class BikeGearAnalytics {
+            constructor() {
+                this.clicks = JSON.parse(localStorage.getItem('bikeGearClicks') || '{}');
+                this.totalClicks = parseInt(localStorage.getItem('totalClicks') || '0');
+                this.init();
+            }
+
+            init() {
+                this.attachClickListeners();
+                this.updateUI();
+                this.showAnalyticsInfo();
+            }
+
+            attachClickListeners() {
+                document.querySelectorAll('[data-track]').forEach(element => {
+                    element.addEventListener('click', (e) => {
+                        const trackingId = e.target.getAttribute('data-track');
+                        this.trackClick(trackingId, e.target.textContent.trim());
+                    });
+                });
+            }
+
+            trackClick(id, text) {
+                const timestamp = new Date().toISOString();
+                const page = 'glasses';
+
+                if (!this.clicks[id]) {
+                    this.clicks[id] = [];
+                }
+
+                this.clicks[id].push({
+                    timestamp,
+                    page,
+                    text,
+                    userAgent: navigator.userAgent,
+                    url: window.location.href
+                });
+
+                this.totalClicks++;
+                this.saveData();
+                this.updateUI();
+
+                console.log(`Analytics: Button clicked - ${id} (${text}) on ${page} page`);
+            }
+
+            saveData() {
+                localStorage.setItem('bikeGearClicks', JSON.stringify(this.clicks));
+                localStorage.setItem('totalClicks', this.totalClicks.toString());
+            }
+
+            updateUI() {
+                const clickCountElement = document.getElementById('click-count');
+                if (clickCountElement) {
+                    clickCountElement.textContent = this.totalClicks;
+                }
+            }
+
+            showAnalyticsInfo() {
+                const analyticsInfo = document.getElementById('analytics-info');
+                if (analyticsInfo) {
+                    analyticsInfo.classList.add('show');
+                    setTimeout(() => {
+                        analyticsInfo.classList.remove('show');
+                    }, 3000);
+                }
+            }
+
+            getAnalyticsData() {
+                return {
+                    clicks: this.clicks,
+                    totalClicks: this.totalClicks,
+                    topButtons: this.getTopButtons(),
+                    recentActivity: this.getRecentActivity()
+                };
+            }
+
+            getTopButtons() {
+                const buttonCounts = {};
+                Object.keys(this.clicks).forEach(buttonId => {
+                    buttonCounts[buttonId] = this.clicks[buttonId].length;
+                });
+                return Object.entries(buttonCounts)
+                    .sort(([,a], [,b]) => b - a)
+                    .slice(0, 5);
+            }
+
+            getRecentActivity(limit = 10) {
+                const allClicks = [];
+                Object.keys(this.clicks).forEach(buttonId => {
+                    this.clicks[buttonId].forEach(click => {
+                        allClicks.push({ buttonId, ...click });
+                    });
+                });
+                return allClicks
+                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+                    .slice(0, limit);
+            }
+        }
+
+        // Initialize analytics when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.bikeGearAnalytics = new BikeGearAnalytics();
+        });
+
+        // SEO and Performance optimizations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add accessibility attributes
+            const glassesImages = document.querySelectorAll('.glasses-image');
+            glassesImages.forEach(img => {
+                img.setAttribute('role', 'img');
+                img.setAttribute('aria-label', 'Cycling glasses illustration');
+            });
+
+            // Add structured data for SEO
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "Premium Cycling Glasses Collection",
+                "description": "Professional cycling eyewear with UV protection and advanced lens technology",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Vibe Code Advanced"
+                },
+                "category": "Cycling Eyewear",
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "availability": "https://schema.org/InStock",
+                    "priceCurrency": "USD",
+                    "lowPrice": "59.99",
+                    "highPrice": "229.99"
+                }
+            };
+
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(structuredData);
+            document.head.appendChild(script);
+        });
+    </script>
 </body>
 </html>

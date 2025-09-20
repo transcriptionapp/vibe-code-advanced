@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Bike Helmets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .helmet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .helmet-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .helmet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .helmet-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #666;
+        }
+
+        .helmet-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .helmet-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .helmet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Beautiful Bike Helmets</h1>
+            <p class="subtitle">Safety meets style on every ride</p>
+        </header>
+
+        <div class="helmet-grid">
+            <div class="helmet-card">
+                <div class="helmet-image">🚴‍♀️</div>
+                <h3 class="helmet-title">Aero Pro Racing</h3>
+                <p class="helmet-description">Sleek aerodynamic design with carbon fiber shell and premium ventilation system for competitive cyclists.</p>
+                <ul class="features">
+                    <li>Carbon fiber construction</li>
+                    <li>18 ventilation channels</li>
+                    <li>Magnetic buckle system</li>
+                    <li>Anti-bacterial padding</li>
+                </ul>
+            </div>
+
+            <div class="helmet-card">
+                <div class="helmet-image">🌟</div>
+                <h3 class="helmet-title">Urban Commuter</h3>
+                <p class="helmet-description">Stylish everyday helmet with integrated LED lights and reflective elements for maximum visibility in city traffic.</p>
+                <ul class="features">
+                    <li>Built-in LED lighting</li>
+                    <li>Reflective side panels</li>
+                    <li>Removable visor</li>
+                    <li>Quick-adjust dial fit</li>
+                </ul>
+            </div>
+
+            <div class="helmet-card">
+                <div class="helmet-image">🏔️</div>
+                <h3 class="helmet-title">Mountain Explorer</h3>
+                <p class="helmet-description">Rugged protection for trail riders with extended rear coverage and MIPS technology for enhanced safety.</p>
+                <ul class="features">
+                    <li>MIPS safety technology</li>
+                    <li>Extended rear protection</li>
+                    <li>Goggle-compatible design</li>
+                    <li>Sweat-wicking liner</li>
+                </ul>
+            </div>
+
+            <div class="helmet-card">
+                <div class="helmet-image">💎</div>
+                <h3 class="helmet-title">Premium Classic</h3>
+                <p class="helmet-description">Timeless design with hand-crafted details and premium materials for the discerning cyclist who values elegance.</p>
+                <ul class="features">
+                    <li>Hand-crafted finish</li>
+                    <li>Premium leather straps</li>
+                    <li>Vintage-inspired design</li>
+                    <li>Limited edition colors</li>
+                </ul>
+            </div>
+
+            <div class="helmet-card">
+                <div class="helmet-image">⚡</div>
+                <h3 class="helmet-title">Electric Speed</h3>
+                <p class="helmet-description">High-performance helmet designed for e-bike riders with enhanced impact protection and smart connectivity features.</p>
+                <ul class="features">
+                    <li>Smart connectivity</li>
+                    <li>Enhanced impact zones</li>
+                    <li>Bluetooth speakers</li>
+                    <li>Emergency alert system</li>
+                </ul>
+            </div>
+
+            <div class="helmet-card">
+                <div class="helmet-image">🌈</div>
+                <h3 class="helmet-title">Youth Adventure</h3>
+                <p class="helmet-description">Colorful and fun helmet designed specifically for young riders with adjustable sizing and playful graphics.</p>
+                <ul class="features">
+                    <li>Adjustable sizing system</li>
+                    <li>Fun color options</li>
+                    <li>Impact-resistant shell</li>
+                    <li>Easy-clean surface</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Find Your Perfect Helmet</h2>
+            <p class="cta-text">Every ride deserves the perfect combination of safety, comfort, and style. Discover the helmet that matches your cycling adventure.</p>
+            <a href="#" class="btn">Explore Collection</a>
+        </div>
+    </div>
+</body>
+</html>

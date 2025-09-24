@@ -1,0 +1,26 @@
+{
+  "name": "advanced-vibe-coding",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/transcriptionapp/vibe-code-advanced.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/transcriptionapp/vibe-code-advanced/issues"
+  },
+  "homepage": "https://github.com/transcriptionapp/vibe-code-advanced#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
